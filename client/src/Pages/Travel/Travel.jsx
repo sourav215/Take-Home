@@ -11,8 +11,8 @@ import {
 
 const Travel = () => {
   return (
-    <TableContainer m={"10"}>
-      <Table variant="simple">
+    <TableContainer p={"10"} bg={"gray.50"} h={"100vh"}>
+      <Table variant="simple" bg={"white"}>
         <Thead>
           <Tr>
             <Th>Name</Th>

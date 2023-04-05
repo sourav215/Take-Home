@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ReactNode } from "react";
+
 import {
   Box,
   Flex,

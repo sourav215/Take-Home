@@ -1,24 +1,102 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Flex,
   Box,
   FormControl,
   FormLabel,
   Input,
-  Checkbox,
   Stack,
-  Link,
-  Button,
   Heading,
   Text,
   useColorModeValue,
   Select,
-  HStack,
   InputGroup,
   InputLeftAddon,
+  useToast,
 } from "@chakra-ui/react";
 
 const Home = () => {
+  const [formInput, setFormInput] = useState({
+    name: "",
+    email: "",
+    destination: "",
+    no_of_travellers: 1,
+    budget_per_person: 0,
+  });
+  const toast = useToast({ position: "top" });
+
+  // Function to set form Input
+  const handleFormInputChange = (e) => {
+    setFormInput({ ...formInput, [e.target.name]: e.target.value });
+  };
+
+  // Function To Validate form
+  const validateForm = ({
+    name,
+    email,
+    destination,
+    no_of_travellers,
+    budget_per_person,
+  }) => {
+    if (!name) {
+      toast({
+        title: `Name is required`,
+        status: "error",
+        isClosable: true,
+      });
+      return false;
+    }
+    if (!email) {
+      toast({
+        title: `Email is required`,
+        status: "error",
+        isClosable: true,
+      });
+      return false;
+    }
+    if (!destination) {
+      toast({
+        title: `Destination is required`,
+        status: "error",
+        isClosable: true,
+      });
+      return false;
+    }
+    if (no_of_travellers == 0) {
+      toast({
+        title: `No Of Travellers is required`,
+        status: "error",
+        isClosable: true,
+      });
+      return false;
+    }
+    if (budget_per_person == 0) {
+      toast({
+        title: `Budget is required`,
+        status: "error",
+        isClosable: true,
+      });
+      return false;
+    }
+    return true;
+  };
+
+  // function to handle form submit
+  const handleFormSubmit = () => {
+    if (!validateForm(formInput)) return;
+    toast({
+      title: `Form submitted`,
+      status: "success",
+      isClosable: true,
+    });
+    setFormInput({
+      name: "",
+      email: "",
+      destination: "",
+      no_of_travellers: 1,
+      budget_per_person: 0,
+    });
+  };
   return (
     <Flex
       minH={"100vh"}
@@ -40,32 +118,57 @@ const Home = () => {
           p={8}
         >
           <Stack spacing={4}>
-            <FormControl>
+            <FormControl isRequired>
               <FormLabel>Name</FormLabel>
-              <Input type="name" />
+              <Input
+                type="name"
+                name="name"
+                value={formInput.name}
+                onChange={handleFormInputChange}
+              />
             </FormControl>
-            <FormControl>
+            <FormControl isRequired>
               <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <Input
+                type="email"
+                name="email"
+                value={formInput.email}
+                onChange={handleFormInputChange}
+              />
             </FormControl>
-            <FormControl>
+            <FormControl isRequired>
               <FormLabel>Where do you want to go?</FormLabel>
-              <Select placeholder="Select option">
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+              <Select
+                placeholder="Select Destination"
+                name="destination"
+                value={formInput.destination}
+                onChange={handleFormInputChange}
+              >
+                <option value="India">India</option>
+                <option value="Africa">Africa</option>
+                <option value="Europe">Europe</option>
               </Select>
             </FormControl>
-            <FormControl>
+            <FormControl isRequired>
               <FormLabel>No. of Travellers</FormLabel>
-              <Input type="number" />
+              <Input
+                type="number"
+                name="no_of_travellers"
+                value={formInput.no_of_travellers}
+                onChange={handleFormInputChange}
+              />
             </FormControl>
 
-            <FormControl>
+            <FormControl isRequired>
               <FormLabel>Budget Per Person</FormLabel>
               <InputGroup>
-                <InputLeftAddon children="$ USD" />
-                <Input type="number" placeholder="phone number" />
+                <InputLeftAddon children="USD" />
+                <Input
+                  type="number"
+                  name="budget_per_person"
+                  value={formInput.budget_per_person}
+                  onChange={handleFormInputChange}
+                />
               </InputGroup>
             </FormControl>
             <Input
@@ -76,6 +179,7 @@ const Home = () => {
               _hover={{
                 bg: "blue.500",
               }}
+              onClick={handleFormSubmit}
             />
           </Stack>
         </Box>
