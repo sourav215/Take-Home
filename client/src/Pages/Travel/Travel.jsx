@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   Thead,
@@ -9,10 +9,36 @@ import {
   TableContainer,
   Spinner,
   Flex,
+  useToast,
+  Text,
 } from "@chakra-ui/react";
 
 const Travel = () => {
   const [loadingState, setLoadingState] = useState(true);
+  const [allDetails, setAllDetails] = useState([]);
+  const toast = useToast({ position: "top" });
+
+  const getData = async () => {
+    setLoadingState(true);
+    try {
+      let res = await fetch("http://localhost:8080/api/");
+      let data = await res.json();
+      setLoadingState(false);
+      console.log(data);
+      setAllDetails(data.data);
+    } catch (error) {
+      console.log(error);
+      setLoadingState(false);
+      toast({
+        title: `Couldn't Get Data`,
+        status: "error",
+        isClosable: true,
+      });
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, []);
 
   if (loadingState) {
     return (
@@ -30,6 +56,9 @@ const Travel = () => {
   }
   return (
     <TableContainer p={"10"} bg={"gray.50"} h={"100vh"}>
+      <Text align={"center"} fontSize={"4xl"} marginBottom={"6"}>
+        Travellers
+      </Text>
       <Table variant="simple" bg={"white"}>
         <Thead>
           <Tr>
@@ -40,21 +69,24 @@ const Travel = () => {
             <Th isNumeric>Budget Per Person (USD)</Th>
           </Tr>
         </Thead>
+
         <Tbody>
-          <Tr>
-            <Td>Sourav Jana</Td>
-            <Td>sourav10080@gmail.com</Td>
-            <Td>India</Td>
-            <Td isNumeric>3</Td>
-            <Td isNumeric>$ 1200</Td>
-          </Tr>
-          <Tr>
-            <Td>Sourav Jana</Td>
-            <Td>sourav10080@gmail.com</Td>
-            <Td>India</Td>
-            <Td isNumeric>3</Td>
-            <Td isNumeric>$ 1200</Td>
-          </Tr>
+          {allDetails.map(
+            (
+              { name, email, destination, no_of_travellers, budget_per_person },
+              index
+            ) => {
+              return (
+                <Tr key={index}>
+                  <Td>{name}</Td>
+                  <Td>{email}</Td>
+                  <Td>{destination}</Td>
+                  <Td isNumeric>{no_of_travellers}</Td>
+                  <Td isNumeric>{budget_per_person}</Td>
+                </Tr>
+              );
+            }
+          )}
         </Tbody>
       </Table>
     </TableContainer>
