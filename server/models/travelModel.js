@@ -21,13 +21,12 @@ const TravelSchema = new mongoose.Schema(
       required: true,
     },
     budget_per_person: {
-      type: Number,
+      type: String,
       required: true,
     },
   },
   {
     versionKey: false,
-    timestamps: true,
   }
 );
 
