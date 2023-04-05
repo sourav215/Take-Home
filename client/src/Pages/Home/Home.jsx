@@ -23,7 +23,7 @@ const Home = () => {
     email: "",
     destination: "",
     no_of_travellers: 1,
-    budget_per_person: 0,
+    budget_per_person: "",
   });
   const toast = useToast({ position: "top" });
 
