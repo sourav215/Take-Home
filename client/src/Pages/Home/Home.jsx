@@ -14,8 +14,10 @@ import {
   InputLeftAddon,
   useToast,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   const [formInput, setFormInput] = useState({
     name: "",
     email: "",
@@ -54,6 +56,14 @@ const Home = () => {
       });
       return false;
     }
+    if (!email.includes("@")) {
+      toast({
+        title: `Enter valid email`,
+        status: "error",
+        isClosable: true,
+      });
+      return false;
+    }
     if (!destination) {
       toast({
         title: `Destination is required`,
@@ -62,7 +72,7 @@ const Home = () => {
       });
       return false;
     }
-    if (no_of_travellers == 0) {
+    if (!no_of_travellers || no_of_travellers == 0) {
       toast({
         title: `No Of Travellers is required`,
         status: "error",
@@ -96,6 +106,7 @@ const Home = () => {
       no_of_travellers: 1,
       budget_per_person: 0,
     });
+    navigate("/travel")
   };
   return (
     <Flex

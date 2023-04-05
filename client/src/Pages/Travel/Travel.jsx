@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Table,
   Thead,
@@ -7,9 +7,27 @@ import {
   Th,
   Td,
   TableContainer,
+  Spinner,
+  Flex,
 } from "@chakra-ui/react";
 
 const Travel = () => {
+  const [loadingState, setLoadingState] = useState(true);
+
+  if (loadingState) {
+    return (
+      <Flex align={"center"} justify={"center"} p={"20"}>
+        <Spinner
+          alignItems={"center"}
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Flex>
+    );
+  }
   return (
     <TableContainer p={"10"} bg={"gray.50"} h={"100vh"}>
       <Table variant="simple" bg={"white"}>
