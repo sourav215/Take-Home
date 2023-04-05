@@ -92,20 +92,39 @@ const Home = () => {
   };
 
   // function to handle form submit
-  const handleFormSubmit = () => {
+  const handleFormSubmit = async() => {
     if (!validateForm(formInput)) return;
     toast({
       title: `Form submitted`,
       status: "success",
       isClosable: true,
     });
-    setFormInput({
-      name: "",
-      email: "",
-      destination: "",
-      no_of_travellers: 1,
-      budget_per_person: 0,
-    });
+    try {
+      let response = await fetch("http://localhost:8080/api/add",{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({...formInput,budget_per_person: "$"+formInput.budget_per_person })
+      })
+      let data = await response.json();
+      console.log(data)
+      setFormInput({
+        name: "",
+        email: "",
+        destination: "",
+        no_of_travellers: 1,
+        budget_per_person: "",
+      });
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: `Couldn't Post Data`,
+        status: "error",
+        isClosable: true,
+      });
+    }
+    
     navigate("/travel")
   };
   return (
