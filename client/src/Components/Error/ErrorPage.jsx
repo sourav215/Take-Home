@@ -9,11 +9,11 @@ function ErrorPage() {
           margin: "100px auto",
         }}
       >
-        {/* <h1>Error Page</h1> */}
+   
         <div style={{ width: "200px" }}>
           <img
             src="https://static.pbcdn.in/cdn/images/error-icon-updated.png"
-            alt="Error Image"
+            alt="icon"
             width={"100%"}
           />
         </div>

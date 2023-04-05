@@ -125,7 +125,7 @@ const Home = () => {
       });
     }
     
-    navigate("/travel")
+    navigate("/travel-details")
   };
   return (
     <Flex
