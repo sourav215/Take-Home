@@ -10,7 +10,9 @@ Two pages app.
 ### Teck Stack
 
 Frontend - Reactjs, Chakra-UI
+<br/>
 Backend - Nodejs, Expressjs
+<br/>
 Database - MongoDB
 
 ## Frontend (Client)
