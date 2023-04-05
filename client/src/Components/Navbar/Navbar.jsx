@@ -14,7 +14,7 @@ import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
 const Links = [
   { title: "Home", path: "/" },
-  { title: "Travel", path: "/travel" },
+  { title: "Travel Details", path: "/travel-details" },
 ];
 
 const NavLink = ({ title, path }) => <Link to={path}>{title}</Link>;

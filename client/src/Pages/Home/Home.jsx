@@ -100,7 +100,7 @@ const Home = () => {
       isClosable: true,
     });
     try {
-      let response = await fetch("http://localhost:8080/api/add",{
+      let response = await fetch("https://takehome.onrender.com/api/add",{
         method: "POST",
         headers: {
           "Content-Type": "application/json"

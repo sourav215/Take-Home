@@ -21,10 +21,9 @@ const Travel = () => {
   const getData = async () => {
     setLoadingState(true);
     try {
-      let res = await fetch("http://localhost:8080/api/");
+      let res = await fetch("https://takehome.onrender.com/api");
       let data = await res.json();
-      setLoadingState(false);
-      console.log(data);
+      setLoadingState(false);      
       setAllDetails(data.data);
     } catch (error) {
       console.log(error);
