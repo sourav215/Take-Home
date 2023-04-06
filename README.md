@@ -7,7 +7,7 @@ Two pages app.
 - The first page contain a Travel Request Form.
 - The second page display all the submissions made using the form on the first page in tabular form.
 
-### Teck Stack
+### Tech Stack
 
 Frontend - Reactjs, Chakra-UI
 <br/>
