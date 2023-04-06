@@ -29,9 +29,10 @@ Deployed Link - https://takehomesourav.netlify.app
 
 Runs the app in the development mode.\
 Open [http://localhost:8080](http://localhost:8080) to view it in terminal.
+<br/>
 Deployed Link - https://takehome.onrender.com/api
 <br/>
 Endpoint to get all data - https://takehome.onrender.com/api
 <br/>
-Endpoint to add new data - https://takehome.onrender.com/api/
+Endpoint to add new data - https://takehome.onrender.com/api/add
 
